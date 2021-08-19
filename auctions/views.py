@@ -8,6 +8,7 @@ from .models import User
 
 
 def index(request):
+    # every on could see the index 
     return render(request, "auctions/index.html")
 
 
@@ -32,6 +33,7 @@ def login_view(request):
 
 
 def logout_view(request):
+    #log user out
     logout(request)
     return HttpResponseRedirect(reverse("index"))
 
