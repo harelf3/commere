@@ -1,4 +1,12 @@
-body {
+/*body {
+    padding: 10px;
+    
+    
+}*/
+
+
+
+.back{
     padding: 10px;
     background-image:url('check.gif');
     background-size: cover;
@@ -6,9 +14,10 @@ body {
     color: white;
     
 }
-
 /*#gif{
     background: url("auctions/galaxy.gif");
+
+
 }*/
 
 
@@ -24,3 +33,78 @@ a:link , a:visited,a:active{
 a:hover{
     color: purple;
  } 
+
+
+ .form-control:focus, .form-control:active, .form-control {
+
+    opacity: .5;
+    background-color: black;
+    color: white;
+}
+
+::placeholder {
+    color: rgb(255, 255, 255);
+    font-size: 1em;
+  }
+  
+
+/*.btn btn-primary{
+    background-color: purple;
+        outline-color: purple;
+        outline: none;
+        border-color: purple;   
+}
+
+#noborders, #noborders:hover, #noborders:active, #noborders:visited ,#noborders:onclick{
+
+        background-color: purple;
+        outline-color: purple;
+        outline: none;
+        border-color: purple;
+
+ }
+*/
+ .btn, .btn:active, .btn:visited {
+    background-color: purple;
+    border: none;
+    outline: none; 
+    color: white;
+    -webkit-tap-highlight-color: transparent;
+
+ }
+ .btn:hover{
+    background-color: rgb(228, 121, 228);
+    border: none;
+    outline: none; 
+    color: white;
+    -webkit-tap-highlight-color: transparent;
+
+ }
+
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {   
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0) inset, 0 0 0px rgba(0, 0, 0, 0);
+  outline: 0 none;
+}
+
+
+
+.card{
+    background-color: rgb(0, 0, 0)!important;
+}
