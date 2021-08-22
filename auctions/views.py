@@ -3,13 +3,30 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
-
+from .models import Bid, Listing
 from .models import User
+from auctions import models
+
+from django import forms
+
+class Createform(forms.Form):
+    title = forms.CharField(max_length=100)
+    description = forms.CharField(widget=forms.Textarea)
+    image = forms.CharField()
+    first_bid = forms.IntegerField()
+
+class Bidform(forms.Form):
+    new_bid = forms.IntegerField()
 
 
 def index(request):
     # every on could see the index 
-    return render(request, "auctions/index.html")
+    #get all listings
+    bids = Bid.objects.all()
+    return render(request, "auctions/index.html",{
+        "listings":Listing.objects.all(),
+        "bids":bids
+    })
 
 
 def login_view(request):
@@ -63,3 +80,57 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "auctions/register.html")
+
+def active_listing(request,name):
+    if request.method =="POST":
+        form = Bidform(request.POST)
+        if form.is_valid():
+            listing = Listing.objects.get(pk=name)
+            curr_bid = form.cleaned_data['new_bid']
+            old_bid = Listing.objects.filter(id=name).values('first_bid')
+            if old_bid[0]['first_bid']>= curr_bid:
+                form = Bidform()
+                listing = Listing.objects.get(pk=name)
+                bids = Bid.objects.filter(pk__in=[name,0])
+                message =f"bid have to be higher then old this {curr_bid} "
+                return render(request,"auctions/listing.html",{
+                    "listing":listing,
+                    "bids":bids,
+                    "form":form,
+                    "message":message
+        
+                })
+            else:
+                Listing.objects.filter(id=name).update(first_bid=curr_bid)
+                return HttpResponseRedirect(reverse("index"))
+
+    else:
+        #get all data base entries 
+        old_bid = Listing.objects.filter(id=name).values('first_bid')
+        form = Bidform()
+        listing = Listing.objects.get(pk=name)
+        bids = Bid.objects.filter(pk__in=[name,0])
+        return render(request,"auctions/listing.html",{
+            "listing":listing,
+            "bids":bids,
+            "form":form,
+            "old_bid":old_bid[0]['first_bid']
+        
+    })
+
+def create(request):
+    if request.method =="POST":
+        form = Createform(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            description = form.cleaned_data['description']
+            image = form.cleaned_data['image']
+            first_bid = form.cleaned_data['first_bid']
+            Listing.objects.create(title=title,description=description,image=image,first_bid=first_bid)
+            return HttpResponseRedirect(reverse("index"))
+    else:
+        form = Createform()
+        return render(request,"auctions/create.html",{
+            "form":form
+        })
+
