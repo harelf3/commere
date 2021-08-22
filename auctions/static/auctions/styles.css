@@ -108,3 +108,41 @@ input[type="color"]:focus,
 .card{
     background-color: rgb(0, 0, 0)!important;
 }
+
+.gradient{
+    -webkit-text-transform: uppercase; 
+    -webkit-background-image: linear-gradient(to right, #800080, #ff00ff, #5d5dd6, #79b4e4);
+    -webkit-background-clip: text; 
+    -webkit-background-clip: text; 
+    -webkit-color: transparent;
+    -webkit-background-size: 400%;
+    -webkit-background-position: -100%;  
+    -webkit-animation: animatedText 15s infinite alternate-reverse;
+    animation: animatedText 5s infinite ;
+    text-transform: uppercase; 
+    background-image: linear-gradient(to right, #800080, #ff00ff, #5d5dd6, #79b4e4);
+    background-clip: text; 
+    background-clip: text; 
+    color: transparent;
+    background-size: 400%;
+    background-position: -100%;  
+    animation: animatedText 15s infinite ;
+  }
+  
+@keyframes animatedText{
+    to{
+        -webkit-background-position: 100%; 
+        background-position: 100%; 
+    }
+  }
+  
+/* .box {
+  width: 200px;
+  height: 200px;
+  background: 
+    repeating-radial-gradient(
+      circle at 0 0, 
+      #eee,
+      #ccc 50px
+    );
+}*/

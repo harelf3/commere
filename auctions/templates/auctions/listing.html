@@ -1,0 +1,44 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+
+  <!---   <img src="{{listing.image}}" style="max-width: 540px; max-height: 540;" class="card-img-top" alt="{{listing.title}}" >
+
+        <h5 class="card-title">{{listing.title}}</h5>
+        <p class="card-text">{{listing.description}}</p>
+        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+
+
+        <div class="card mb-2" >
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="{{listing.image}}" style="max-width: 540px;  max-height: 540;" class="img-fluid rounded-start" alt="{{listing.title}}">
+            </div>
+            <div class="col-md-4">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              </div>
+            </div>
+          </div>
+        </div>
+  --> 
+<h1>{{old_bid}}</h1>
+  <img src="{{listing.image}}" style="max-width: 540px;  max-height: 540px;" class="card-img-top" alt="{{listing.title}}">
+  <div class="card-body"  >
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+  </div>
+<p> bidding form </p>
+{% if message %}
+<p>{{message}}</p>
+{%endif%}
+<h3 class="=gradient">current bid {{listing.first_bid}} smekels</h3>
+<form action="{% url 'active_listing' listing.id %}" method="post">
+  {% csrf_token %}
+  {{ form }}
+  <input id ="noborders" type="submit" value="Submit a new bid">
+</form>
+{% endblock %}
